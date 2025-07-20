@@ -1,6 +1,7 @@
 package com.viasoft.email_service.factory;
 
 import com.viasoft.email_service.config.AppProperties;
+import com.viasoft.email_service.enums.EmailProvider;
 import com.viasoft.email_service.service.AwsEmailServiceImpl;
 import com.viasoft.email_service.service.EmailService;
 import com.viasoft.email_service.service.OciEmailServiceImpl;
@@ -18,7 +19,7 @@ class EmailServiceFactoryTest {
         AwsEmailServiceImpl awsService = new AwsEmailServiceImpl();
 
         AppProperties props = mock(AppProperties.class);
-        when(props.getIntegracao()).thenReturn("AWS");
+        when(props.getIntegracao()).thenReturn(EmailProvider.AWS);
 
         ApplicationContext context = mock(ApplicationContext.class);
         when(context.getBean("AWS")).thenReturn(awsService);
@@ -35,7 +36,7 @@ class EmailServiceFactoryTest {
         OciEmailServiceImpl ociService = new OciEmailServiceImpl();
 
         AppProperties props = mock(AppProperties.class);
-        when(props.getIntegracao()).thenReturn("OCI");
+        when(props.getIntegracao()).thenReturn(EmailProvider.OCI);
 
         ApplicationContext context = mock(ApplicationContext.class);
         when(context.getBean("OCI")).thenReturn(ociService);
@@ -50,7 +51,7 @@ class EmailServiceFactoryTest {
     @Test
     void testGetInstance_ThrowsExceptionForUnknown() {
         AppProperties props = mock(AppProperties.class);
-        when(props.getIntegracao()).thenReturn("UNKNOWN");
+        when(props.getIntegracao()).thenReturn(null);
 
         ApplicationContext context = mock(ApplicationContext.class);
 
