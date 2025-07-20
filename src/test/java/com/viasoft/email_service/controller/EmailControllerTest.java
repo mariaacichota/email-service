@@ -8,7 +8,9 @@ import com.viasoft.email_service.service.EmailService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
+import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -24,9 +26,14 @@ class EmailControllerTest {
     @Mock
     private EmailService emailService;
 
+    @Mock
+    private MessageSource messageSource;
+
     @BeforeEach
     void setup() {
         MockitoAnnotations.openMocks(this);
+        controller = new EmailController(factory, messageSource);
+        ReflectionTestUtils.setField(controller, "messageSource", messageSource);
     }
 
     @Test
