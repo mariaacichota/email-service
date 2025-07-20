@@ -12,4 +12,8 @@ public class AppProperties {
     public String getIntegracao() {
         return integracao;
     }
+
+    public void setIntegracao(String integracao) {
+        this.integracao = integracao;
+    }
 }

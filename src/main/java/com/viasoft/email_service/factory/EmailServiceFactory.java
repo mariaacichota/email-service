@@ -24,4 +24,10 @@ public class EmailServiceFactory {
 
         return (EmailService) context.getBean(integracao);
     }
+
+    @Autowired
+    public EmailServiceFactory(ApplicationContext context, AppProperties properties) {
+        this.context = context;
+        this.properties = properties;
+    }
 }
