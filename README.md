@@ -122,7 +122,20 @@ Para testar integração OCI, basta trocar `mail.integracao=OCI`. Se desejar, ta
 * Os testes de integração usam `TestRestTemplate` para simular requisição REST real.
 * Os erros são tratados e retornam HTTP `400` ou `500` conforme o caso.
 
-## 👥 Colaboradores  
+Esse projeto é baseado na arquitetura de camadas, com componentes desacoplados, seguindo as lógicas dos princípios SOLID e Clean Code que garantem um bom funcionamento e legibilidade do código. As camadas do projeto se descrevem de tal forma que:
+* `controller`: expõe endpoints REST.
+* `service`: centraliza regras de negócio.
+* `factory`: separa lógica de escolha de implementação.
+* `dto`: abstração para entrada/saída de dados.
+* `config`: configuração isolada (como AppProperties).
+* `enum`: define integração permitida (AWS/OCI).
+
+Seguindo os princípios SOLID, cada classe tem uma única responsabilidade clara; o código é aberto à extensão, fechado para modificação; o princípio de substituição é usado, onde AwsEmailServiceImpl e OciEmailServiceImpl herdam de EmailService e podem ser utilizadas no lugar deste; há uma interface única, adequada ao caso; é utilizada a injeção de dependência pelo Spring e via construtor em testes. Além disso, o Design Pattern que pode ser encontrado no projeto se apresenta como:
+* `Factory Pattern`: EmailServiceFactory escolhe implementação baseada em configuração;
+* `Strategy Pattern`: cada EmailServiceImpl lida com a adaptação da mensagem para um formato específico (AWS ou OCI);
+* `DTO Pattern`: usado para abstrair e validar dados de entrada.
+
+## Colaboradores  
 <table>
   <tr>
     <td align="center"><a href="https://github.com/mariaacichota"><img src="https://avatars.githubusercontent.com/mariaacichota" width="80px;" alt="Maria Cichota"/><br /><sub><b>Maria Cichota</b></sub></a><br /><a href="#" title="Code">💻🛠️</a></td>
