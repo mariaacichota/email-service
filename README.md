@@ -1,5 +1,6 @@
 # email-service
-Projeto Spring Boot para envio de e-mails via diferentes serviços de integração (AWS, OCI). O sistema utiliza injeção de dependências, configuração via propriedades externas e padrão de fábrica para escolher o serviço de envio.
+Projeto Spring Boot para envio de e-mails via diferentes serviços de integração (AWS e OCI).
+O sistema utiliza injeção de dependências, configuração via propriedades externas e o padrão de projeto Factory para selecionar dinamicamente o serviço de envio.
 
 ## Organização do Projeto
 
@@ -44,7 +45,15 @@ Gerencia injeção de dependência, ciclo de vida dos beans e configuração da 
 
 ## Conceitos REST Utilizados
 
-A aplicação expõe endpoints REST para envio de e-mails (via EmailController), a comunicação é feita via HTTP, o método POST permite enviar os dados no corpo da requisição utilizando JSON (que pode ser utilizado tanto na requisição, quanto na resposta do endpoint). O padrão de projeto Factory é usado para escolher dinamicamente qual serviço REST interno será usado para enviar o e-mail (AWS ou OCI). Por fim, o tratamento de erros com respostas apropriadas no controller (ex: 400 Bad Request para valores inválidos).
+A aplicação expõe endpoints REST para envio de e-mails através do EmailController.
+A comunicação é realizada via HTTP, utilizando o método POST, com envio e recebimento de dados no formato JSON.
+
+O Factory Pattern é utilizado para selecionar dinamicamente qual serviço interno será responsável pelo envio do e-mail (AWS ou OCI), conforme configuração definida em application.properties.
+
+Além disso, o projeto realiza tratamento de erros no controller, retornando respostas HTTP apropriadas, como:
+
+* "400 Bad Request" para dados inválidos;
+* "500 Internal Server Error" para falhas internas.
 
 ## Como Rodar o Projeto
 
